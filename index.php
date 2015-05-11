@@ -6,7 +6,7 @@ require_once(CONFIG_PATH . 'common/mysql-handler.php');
 //DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Check to see if it someone is posting to our form
-if(isset($_POST['action'])) {
+if(isset($_POST['action'])){
 
 	// If it is a post, confirm that it is coming from our form.
 	if(!isset($_SESSION['tokenized']) || $_SESSION['tokenized'] != $_POST['tokenized']){
@@ -69,7 +69,7 @@ if(isset($_POST['action'])) {
 			
 			$step = 'Property';
 			
-		} else if($_POST['action'] == 'Continue to step 3') {
+		} else if($_POST['action'] == 'Continue to step 3'){
 			
 			$_POST['property']['interest'] = $_SESSION['property']['interest'];
 			$_POST['property']['id'] = $_SESSION['property']['id'];
@@ -117,12 +117,15 @@ if(isset($_POST['action'])) {
 			$tmp = $q->fetchAll();
 			$_POST['basic_report']['id'] = $tmp[0]['id'];
 			
-			$_SESSION['property'] = $_POST['property'];
+			$_SESSION['property'] = $_POST['property']; 
 			$_SESSION['basic_report'] = $_POST['basic_report'];
+
 			$step = 'Property Details';
+
 		} else if ($_POST['action'] == 'Get Your Free Report'){
+
 			$sql = "UPDATE gem_basic_reports SET level_of_efficiency = :level_of_efficiency, updated_at = NOW() WHERE id = {$_SESSION['basic_report']['id']}"; //,level_of_comfort = :level_of_comfort,level_of_comfort = :level_of_comfort,ease_of_process = :ease_of_process,budget = :budget,insulation = :insulation,hvac_system = :hvac_system,radiant_barrier = :radiant_barrier,lighting = :lighting,appliances = :appliances,solar_film_on_windows = :solar_film_on_windows,building_envelope_retrofit = :building_envelope_retrofit,windows = :windows,solar_hot_water = :solar_hot_water,roof_radiant = :roof_radiant,solar = :solar,rainwater_harvesting_system = :rainwater_harvesting_system,water_recycling = :water_recycling,
-			$q = $DBH->prepare($sql);
+			$q = $DBH->prepare($sql); 
 			$q->execute(array(
 					':level_of_efficiency' => $_POST['basic_report']['level_of_efficiency'],
 					/*':level_of_comfort' => $_POST['basic_report']['level_of_comfort'],
@@ -144,12 +147,12 @@ if(isset($_POST['action'])) {
 					':water_recycling' => $_POST['basic_report']['water_recycling']*/
 				)
 			);
-			$_SESSION['basic_report_pt2'] = $_POST['basic_report']; 
-			$step = "Free Report"; 
+			$_SESSION['basic_report_pt2'] = $_POST['basic_report'];
+			$step = "Free Report";
 		}
 		
 		header ("location: /forms/free-report/?step=$step");
-	} 
+	}
 } else { 
  
 	$token = md5(time() . rand(1,100));
@@ -166,7 +169,7 @@ if(isset($_POST['action'])) {
 	<li class='col-1-3'><h5>Step 2</h5></li>
 	<li class='col-1-3 last'><h5>Step 3</h5></li>
 </ul>
-		<h4>To get your Free Report, simply get started now on the questionnaire below!</h4>
+		<h2>To get your Free Report, simply get started now on the questionnaire below!</h2>
 		
 			<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report' method='post' name='free-report'>
 				<input type='hidden' name='tokenized' value='$token'/>
@@ -190,12 +193,12 @@ if(isset($_POST['action'])) {
 						<option value='Email'>Email</option>
 						<option value='Phone'>Phone</option>
 					</select>
-				</div>
+				</div> 
 
                                 <div class='field col-1'>
 					<label for='property_interest'>property_interest</label><select id='property_interest' name='property[interest]'>
 						<option value='old-retrofit'>old-retrofit</option>
-						<option value='tear-down'>tear-downt</option>
+						<option value='tear-down'>tear-down</option>
 						<option value='new-retrofit'>new-retrofit</option>
 						<option value='new-construction'>new-construction</option>
 					</select>
@@ -203,7 +206,7 @@ if(isset($_POST['action'])) {
 
 				<!--input id='property_interest' name='property[interest]' value='old-retrofit' type='hidden'-->
 				
-			<div class='actions'>
+				<div class='actions'>
 					<input name='action' type='submit' value='Continue to step 2'>
 				</div>
 			</form>";
@@ -211,7 +214,7 @@ if(isset($_POST['action'])) {
 /*********************************
  *  BEGIN FORM STEP 1 - SIDEBAR  *
  *********************************/		
-		$sidebar = "<h4>Learn How Much Energy Upgrades Could Increase Your Home Value.</h4>
+		$sidebar = "<h2>Learn How Much Energy Upgrades Could Increase Your Home Value.</h2>
 		<p>It's easy and takes just a few minutes. Simply answer the step-by-step questionnaire. The Free Report will provide:<p>
 
 •	An estimated range of energy upgrade costs, based on level of energy reduction you choose from our menu.  Costs vary depending on condition, regional building and energy costs, and other factors.<p>
@@ -229,7 +232,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 /*********************
  *  END FORM STEP 1  *
  *********************/
-	}else{
+	} else {
 		if($_GET['step'] == 'Property'){
 /**********************************
  *  BEGIN FORM STEP 2 - PROPERTY  *
@@ -239,97 +242,94 @@ If you aren’t sure what your utility costs are, you may want to have access to
 	<li class='col-1-3 current'><h5>Step 2</h5></li>
 	<li class='col-1-3 last'><h5>Step 3</h5></li>
 </ul>
-				<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'>
-					<input type='hidden' name='tokenized' value='$token'/>";
+				<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'><input type='hidden' name='tokenized' value='$token'/>";
 			$interest = $_SESSION['property']['interest'];
-
 			if($interest == "old-retrofit" || $interest == "tear-down"){ // upgrade your home
 /**************************************************
- *  BEGIN FORM STEP 2 - OLD RETROFIT OR TEARDOWN  *
+ *  BEGIN FORM STEP 2[OLD RETROFIT OR TEARDOWN]  *
  **************************************************/	
-			$form .= "  <form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'><input type='hidden' name='tokenized' value='$token'/>
-<fieldset>
-	  <div class='field col-1'>
-	    <legend><h4>What property are you interested in upgrading?</h4></legend>
-	  </div>
-	  <div class='field col-1 address'>
-	  	<label for='property_address1'>Address</label><input id='property_address1' name='property[address1]' required placeholder='' type='text'>
-	  </div>
-	  <div class='field col-1 address'>
-	  	<label for='property_address2'>Unit/Apt.</label><input id='property_address2' name='property[address2]' placeholder='' type='text' />
-      </div>
-	  <div class='field city'>
-        <label for='property_city'>City</label><input id='property_city' name='property[city]' required='' placeholder='' type='text' />
-      </div>
-	  <div class='field state'>
-        <label for='property_state'>State</label><input id='property_state' name='property[state]' required='' placeholder='' type='text' />
-      </div>
-      <div class='field zip'>
-        <label for='property_zipcode'>Zipcode</label><input id='property_zipcode' name='property[zipcode]' placeholder='' type='text' />
-      </div>
-      <div class='field'>
-	  	<label for='property_primary_residence'>Primary residence</label><select name='property[primary_residence]'><option value='yes'>yes</option><option value='no'>no</option></select>
-      </div>
-    </fieldset>";
-/************************************************
- *  END FORM STEP 2 - OLD RETROFIT OR TEARDOWN  *
- ************************************************/		
+			$form .= "<fieldset>
+	<div class='field col-1'>
+		<legend><h4>What property are you interested in upgrading?</h4></legend>
+	</div>
+	<div class='field col-1 address'>
+		<label for='property_address1'>Address</label><input id='property_address1' name='property[address1]' required placeholder='' type='text'>
+	</div>
+	<div class='field col-1 address'>
+		<label for='property_address2'>Unit/Apt.</label><input id='property_address2' name='property[address2]' placeholder='' type='text' />
+	</div>
+	<div class='field city'>
+		<label for='property_city'>City</label><input id='property_city' name='property[city]' required='' placeholder='' type='text' />
+	</div>
+	<div class='field state'>
+		<label for='property_state'>State</label><input id='property_state' name='property[state]' required='' placeholder='' type='text' />
+	</div>
+	<div class='field zip'>
+		<label for='property_zipcode'>Zipcode</label><input id='property_zipcode' name='property[zipcode]' placeholder='' type='text' />
+	</div>
+	<div class='field'>
+		<label for='property_primary_residence'>Primary residence</label><select name='property[primary_residence]'><option value='yes'>yes</option><option value='no'>no</option></select>
+	</div>
+</fieldset>
+<p></p>";
+/***********************************************
+ *  END FORM STEP 2[OLD RETROFIT OR TEARDOWN]  *
+ ***********************************************/		
 			} else if($interest == "new-retrofit" || $interest == "new-construction"){ // buy and upgrade a home
-/**********************************************************
- *  BEGIN FORM STEP 2 - NEW RETROFIT OR NEW CONSTRUCTION  *
- **********************************************************/
+/*********************************************************
+ *  BEGIN FORM STEP 2[NEW RETROFIT OR NEW CONSTRUCTION]  *
+ *********************************************************/
 				$form .= "<fieldset>
-  <div class='field col-1'>
-    <legend>Where are you looking for a property?</legend>
-    </div>
-      <div class='field city'>
-        <label for='property_city'>City</label><input id='property_city' name='property[city]' required='' placeholder='' type='text' />
-      </div>
-	  <div class='field state'>
-        <label for='property_state'>State</label><input id='property_state' name='property[state]' required='' placeholder='' type='text' />
-      </div>
-      <div class='field zip'>
-        <label for='property_zipcode'>Zipcode</label><input id='property_zipcode' name='property[zipcode]' placeholder='' type='text' />
-      </div>
-	  <div class='field'>
+	<div class='field col-1'>
+		<legend></h4>Where are you looking for a property?</h4></legend>
+	</div>
+	<div class='field city'>
+		<label for='property_city'>City</label><input id='property_city' name='property[city]' required='' placeholder='' type='text' />
+	</div>
+	<div class='field state'>
+		<label for='property_state'>State</label><input id='property_state' name='property[state]' required='' placeholder='' type='text' />
+	</div>
+	<div class='field zip'>
+		<label for='property_zipcode'>Zipcode</label><input id='property_zipcode' name='property[zipcode]' placeholder='' type='text' />
+	</div>
+	<div class='field'>
 		<label for='property_price_range'>What is your price range?</label><input id='property_price_range' name='property[price_range]' type='text' placeholder='$120,000-$250,000'>
-	  </div>
-</fieldset>";
-/********************************************************
- *  END FORM STEP 2 - OLD RETROFIT OR NEW CONSTRUCTION  *
- ********************************************************/
+	</div>
+</fieldset>
+<p></p>";
+/*******************************************************
+ *  END FORM STEP 2[NEW RETROFIT OR NEW CONSTRUCTION]  *
+ *******************************************************/
 			} 
 			
 			if($interest == "old-retrofit") {
 				// Gather the property Details
-/**************************************
- *  BEGIN FORM STEP 2 - OLD RETROFIT  *
- **************************************/
-				$form .= "
-<fieldset>
-    <div class='field col-1'>
-							<legend>Property Details:</legend> 
-      </div>
-							<div class='field col-1 details'>
-								<label for='basic_report_year_built'>What year was the property built?</label><input id='basic_report_year_built' name='basic_report[year_built]' placeholder='If unknown, use best estimated year' type='text'>
-							</div>
-							<div class='field col-1 details'>
-								<label for='basic_report_sqft'>What is the interior square footage of the property?</label><input id='basic_report_sqft' name='basic_report[sqft]' placeholder='If unknown, use best estimate' type='text'>
-							</div>
-							<!--div class='field'>
-								<label for='basic_report_number_of_windows'>How many windows does the property have?</label><br>
-								<input id='basic_report_number_of_windows' name='basic_report[number_of_windows]' placeholder='15' type='number'>
-							</div-->
-							<div class='field col-1 details'>
-								<label for='basic_report_average_yearly_utilities'>What are the average yearly utilities (include electric, gas, propane, oil, etc. yearly costs)?</label><input id='basic_report_average_yearly_utilities' name='basic_report[average_yearly_utilities]' placeholder='If unknown, use best estimate' type='text'>
-							</div>
-							<!--div class='field'>
-								<label for='basic_report_years_owned'>How many years have you owned the property?</label><br>
-								<input id='basic_report_years_owned' name='basic_report[years_owned]' placeholder='25' type='text'>
-							</div-->
-						</fieldset>";
+/*************************************
+ *  BEGIN FORM STEP 2[OLD RETROFIT]  *
+ *************************************/
+				$form .= "<fieldset>
+	<div class='field col-1'>
+		<legend>Property Details:</legend> 
+	</div>
+	<div class='field col-1 details'>
+		<label for='basic_report_year_built'>What year was the property built?</label><input id='basic_report_year_built' name='basic_report[year_built]' placeholder='If unknown, use best estimated year' type='text'>
+	</div>
+	<div class='field col-1 details'>
+		<label for='basic_report_sqft'>What is the interior square footage of the property?</label><input id='basic_report_sqft' name='basic_report[sqft]' placeholder='If unknown, use best estimate' type='text'>
+	</div>
+	<!--div class='field'>
+		<label for='basic_report_number_of_windows'>How many windows does the property have?</label><input id='basic_report_number_of_windows' name='basic_report[number_of_windows]' placeholder='15' type='number'>
+	</div-->
+	<div class='field col-1 details'>
+		<label for='basic_report_average_yearly_utilities'>What are the average yearly utilities (include electric, gas, propane, oil, etc. yearly costs)?</label><input id='basic_report_average_yearly_utilities' name='basic_report[average_yearly_utilities]' placeholder='If unknown, use best estimate' type='text'>
+	</div>
+	<!--div class='field'>
+		<label for='basic_report_years_owned'>How many years have you owned the property?</label><input id='basic_report_years_owned' name='basic_report[years_owned]' placeholder='25' type='text'>
+	</div-->
+</fieldset>
+<p></p>";
 /************************************
- *  END FORM STEP 2 - OLD RETROFIT  *
+ *  END FORM STEP 2[OLD RETROFIT]  *
  ************************************/
 			}
 
@@ -338,20 +338,18 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					<div class='actions'>
 						<input name='action' type='submit' value='Continue to step 3'>
 					</div>
-				</form>
-			</div>";
+				</form>";
 			
 			$client = $_SESSION['client'];
 			// End Property
 /********************************
  *  END FORM STEP 2 - PROPERTY  *
  ********************************/				
-		} else if($_GET['step'] == 'Property Details'){
+		} else if($_GET['step'] == 'Property Details') {
 /******************************************
  *  BEGIN FORM STEP 3 - PROPERTY DETAILS  *
  ******************************************/	
-			$form = "
-<h4>The more information you can give us, the more accurate of a report we can generate for you.</h4>
+			$form = "<h4>The more information you can give us, the more accurate of a report we can generate for you.</h4>
 			<script>
 				Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
 				    var n = this,
@@ -390,7 +388,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 						<input name='utf8' type='hidden' value='✓'>
 					</div>
 					<fieldset>
-						<legend>Current state of the property</legend>
+						<legend><h4>Current state of the property</h4></legend>
 						<!--div class='field'>
 							<label for='basic_report_current_upgrades'>Have you already upgraded this property?  If so can you tell us what you've done?</label><br>
 							<textarea id='basic_report_current_upgrades' name='basic_report[current_upgrades]' placeholder='Can you give us deails?'></textarea>
@@ -410,7 +408,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 							
 							
 							
-							<p><em>RETROFIT COST ESTIMATION – these costs represent an estimated range of  energy retrofits costs, they do not include adding square footage or conventional upgrades, i.e., new bathrooms or kitchens.  The estimated range represents potential increases in costs based on regional labor and materials.  A breakdown of  project costs and specifications will be finalized, based on approved contractors bids, once contracts are fully initiated, and upon acceptance of all terms and conditions.   </em></p>
+							<p><em>RETROFIT COST ESTIMATION – these costs represent an estimated range of energy retrofits costs, they do not include adding square footage or conventional upgrades, i.e., new bathrooms or kitchens.  The estimated range represents potential increases in costs based on regional labor and materials.  A breakdown of  project costs and specifications will be finalized, based on approved contractors bids, once contracts are fully initiated, and upon acceptance of all terms and conditions.   </em></p>
 	<!--					</div>
 						<!--div class='field'>
 							<label for='basic_report_level_of_comfort'>Are all rooms an even temperature?</label><br>
@@ -522,59 +520,21 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					<div class='actions'>
 						<input name='action' type='submit' value='Get Your Free Report'>
 					</div>
-				</form>
-			</div>";
-		$sidebar = '';
-		if(isset($form) && strlen($form) > 0){
-			if(isset($client)){
-				$sidebar .= "<h2>Your Details:</h2>
-				<p>{$client['first_name']} {$client['last_name']}</p>
-				<p>{$client['email']}</p>";
-				if(strlen($client['home_phone']) > 0){
-					$sidebar .= "<p>h: {$client['home_phone']}</p>";
-				}
-				if(strlen($client['mobile_phone']) > 0){
-					$sidebar .= "<p>m: {$client['mobile_phone']}</p>";
-				}
-			}
-			if(isset($property)){
-				$sidebar .= "<h2>Property:</h2>
-				<p>{$property['address1']}";
-				if(strlen($property['address2']) > 0){
-					$sidebar .= " {$property['address2']}";
-				}
-				$sidebar .= "<br>
-				{$property['city']}, {$property['state']} {$property['zipcode']}</p>";
-			}
-			if(isset($basic_report)){
-				$temp = '';
-				if(strlen($basic_report['sqft']) > 0){
-					$temp .= "<p>Square Footage: {$basic_report['sqft']}";
-				}
-				if(strlen($basic_report['average_yearly_utilities']) > 0){
-					$temp .= "<p>Avg. Yearly Utilities: {$basic_report['average_yearly_utilities']}";
-				}
-				if(strlen($basic_report['year_built']) > 0){
-					$temp .= "<p>Year Built: {$basic_report['year_built']}";
-				}
-				if(strlen($temp) > 0 ){
-					$sidebar .= "<h2>Report Details:</h2>" . $temp . "<br><br><strong>What You Should Know:</strong><br>Typically most property upgrades don’t always realize an exact dollar-for-dollar cost on an appraisal valuation.  As an example, a new kitchen upgrade (average cost in the US is $50k) doesn’t usually appraise at cost.  The same came be said for other upgrades like swimming pools.  GEM chose to take a conservative approach in the incremental property value estimate – final value will depend on many factors and appraiser’s determination, and in some cases the owner may realize a full investment of costs and value.  The GEM beta appraisal program (tested in several U.S. regions) has realized an average of 78% of energy upgrade costs on appraisal valuations."  ;
-				}
-			}
-		}
+				</form>";
 			
 			$client = $_SESSION['client'];
 			$property = $_SESSION['property'];
 			$basic_report = $_SESSION['basic_report'];
 			
 			// End Property Details
-/******************************************
- *  BEGIN FORM STEP 3 - PROPERTY DETAILS  *
- ******************************************/			
+/****************************************
+ *  END FORM STEP 3 - PROPERTY DETAILS  *
+ ****************************************/			
 		} else if($_GET['step'] == 'Free Report'){
 /******************************
  *  BEGIN FREE REPORT OUTPUT  *
  ******************************/
+				
 				$report = "<h1>Your Free Report</h1>";
 
 				$client = $_SESSION['client'];
@@ -1026,17 +986,15 @@ If you aren’t sure what your utility costs are, you may want to have access to
 						<div id='free-report-form' class='sidebar'>  
 							<? if(isset($form)){echo($form);} ?>  
 						</div> 
-					
-						<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
-							<div id='free-report-sidebar'> 	
-								<? if(isset($sidebar)){echo($sidebar);} ?> 
-							</div><!-- /.sidebar -->
-						</aside><!-- /aside -->
-		
 						<div id='free-report' style="background-color:#00bb00;"> 
 							<? if(isset($report)){echo($report);} ?> 
 						</div> 
 					</div><!-- /#content --> 
+					<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
+						<div id='free-report-sidebar'> 	
+							<? if(isset($sidebar)){echo($sidebar);} ?> 
+						</div><!-- /.sidebar -->
+					</aside><!-- /aside -->
 				</div><!-- /.entry-content --> 
 			</div><!-- /.main --> 
 		</div><!-- /.row-->  
