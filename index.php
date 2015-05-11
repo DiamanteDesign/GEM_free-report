@@ -1,7 +1,3 @@
-
-application/x-httpd-php index.php
-PHP script text
-
 <?php 
 session_start();
 error_reporting(E_ALL|E_STRICT);
@@ -9,13 +5,13 @@ require_once('common/config.php');
 require_once(CONFIG_PATH . 'common/mysql-handler.php');
 //DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Check to see if it someone is posting to our form.;
-if(isset($_POST['action'])){
+// Check to see if it someone is posting to our form
+if(isset($_POST['action'])) {
 
 	// If it is a post, confirm that it is coming from our form.
 	if(!isset($_SESSION['tokenized']) || $_SESSION['tokenized'] != $_POST['tokenized']){
 		$errors = array("Invalid Session.  Please start over.");
-	} else{
+	} else {
 		if($_POST['action'] == "Continue to step 2"){
 			
 			// Step one, create the user and client, and tie them together.
@@ -73,7 +69,7 @@ if(isset($_POST['action'])){
 			
 			$step = 'Property';
 			
-		} else if($_POST['action'] == 'Continue to step 3'){
+		} else if($_POST['action'] == 'Continue to step 3') {
 			
 			$_POST['property']['interest'] = $_SESSION['property']['interest'];
 			$_POST['property']['id'] = $_SESSION['property']['id'];
@@ -148,26 +144,23 @@ if(isset($_POST['action'])){
 					':water_recycling' => $_POST['basic_report']['water_recycling']*/
 				)
 			);
-			$_SESSION['basic_report_pt2'] = $_POST['basic_report'];
-			$step = "Free Report";
+			$_SESSION['basic_report_pt2'] = $_POST['basic_report']; 
+			$step = "Free Report"; 
 		}
 		
 		header ("location: /forms/free-report/?step=$step");
-	}
-} else {
-
+	} 
+} else { 
+ 
 	$token = md5(time() . rand(1,100));
 	$_SESSION['tokenized'] = $token;
 	
 	// It isn't a post, so we need to decide what part of the process we are in.
 	if(!isset($_GET['step'])){
 		// This is the first page of the report.
-
- 
 /***********************
  *  BEGIN FORM STEP 1  *
  ***********************/
-
 		$form = "<ul class='row steps'>
 	<li class='col-1-3 current'><h5>Step 1</h5></li>
 	<li class='col-1-3'><h5>Step 2</h5></li>
@@ -208,25 +201,17 @@ if(isset($_POST['action'])){
 					</select>
 				</div>
 
-
-
-
 				<!--input id='property_interest' name='property[interest]' value='old-retrofit' type='hidden'-->
 				
 			<div class='actions'>
 					<input name='action' type='submit' value='Continue to step 2'>
 				</div>
-			</form>
-			
-		</div>";
+			</form>";
 
-/*********************
- *  END FORM STEP 1  *
- *********************/
-/********************************
- *  BEGIN FORM STEP 1 - SIDEBAR *
- ********************************/		
-		$sidebar = "<h2>Learn How Much Energy Upgrades Could Increase Your Home Value.</h2>
+/*********************************
+ *  BEGIN FORM STEP 1 - SIDEBAR  *
+ *********************************/		
+		$sidebar = "<h4>Learn How Much Energy Upgrades Could Increase Your Home Value.</h4>
 		<p>It's easy and takes just a few minutes. Simply answer the step-by-step questionnaire. The Free Report will provide:<p>
 
 •	An estimated range of energy upgrade costs, based on level of energy reduction you choose from our menu.  Costs vary depending on condition, regional building and energy costs, and other factors.<p>
@@ -237,20 +222,31 @@ This information supports important decisions about whether--and a range of how 
 
 If you aren’t sure what your utility costs are, you may want to have access to the last year's utility bills handy, as one of the questions relates to yearly utility costs.  Please include all utility costs including electric, gas, propane, oil, etc.  
 </p>";
+/*******************************
+ *  END FORM STEP 1 - SIDEBAR  *
+ *******************************/
+
+/*********************
+ *  END FORM STEP 1  *
+ *********************/
 	}else{
-		
 		if($_GET['step'] == 'Property'){
+/**********************************
+ *  BEGIN FORM STEP 2 - PROPERTY  *
+ **********************************/	
 			$form = "<ul class='row steps'>
 	<li class='col-1-3'><h5>Step 1</h5></li>
 	<li class='col-1-3 current'><h5>Step 2</h5></li>
 	<li class='col-1-3 last'><h5>Step 3</h5></li>
 </ul>
-			<div id='free-report'>
 				<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'>
 					<input type='hidden' name='tokenized' value='$token'/>";
 			$interest = $_SESSION['property']['interest'];
+
 			if($interest == "old-retrofit" || $interest == "tear-down"){ // upgrade your home
-			
+/**************************************************
+ *  BEGIN FORM STEP 2 - OLD RETROFIT OR TEARDOWN  *
+ **************************************************/	
 			$form .= "  <form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'><input type='hidden' name='tokenized' value='$token'/>
 <fieldset>
 	  <div class='field col-1'>
@@ -275,7 +271,13 @@ If you aren’t sure what your utility costs are, you may want to have access to
 	  	<label for='property_primary_residence'>Primary residence</label><select name='property[primary_residence]'><option value='yes'>yes</option><option value='no'>no</option></select>
       </div>
     </fieldset>";
+/************************************************
+ *  END FORM STEP 2 - OLD RETROFIT OR TEARDOWN  *
+ ************************************************/		
 			} else if($interest == "new-retrofit" || $interest == "new-construction"){ // buy and upgrade a home
+/**********************************************************
+ *  BEGIN FORM STEP 2 - NEW RETROFIT OR NEW CONSTRUCTION  *
+ **********************************************************/
 				$form .= "<fieldset>
   <div class='field col-1'>
     <legend>Where are you looking for a property?</legend>
@@ -293,19 +295,20 @@ If you aren’t sure what your utility costs are, you may want to have access to
 		<label for='property_price_range'>What is your price range?</label><input id='property_price_range' name='property[price_range]' type='text' placeholder='$120,000-$250,000'>
 	  </div>
 </fieldset>";
+/********************************************************
+ *  END FORM STEP 2 - OLD RETROFIT OR NEW CONSTRUCTION  *
+ ********************************************************/
 			} 
 			
 			if($interest == "old-retrofit") {
 				// Gather the property Details
-				$form .= "<ul class='row steps'>
-	<li class='col-1-3 current'><h5>Step 1</h5></li>
-	<li class='col-1-3'><h5>Step 2</h5></li>
-	<li class='col-1-3 last'><h5>Step 3</h5></li>
-</ul>
-
+/**************************************
+ *  BEGIN FORM STEP 2 - OLD RETROFIT  *
+ **************************************/
+				$form .= "
 <fieldset>
     <div class='field col-1'>
-							<legend>Property Details:</legend>
+							<legend>Property Details:</legend> 
       </div>
 							<div class='field col-1 details'>
 								<label for='basic_report_year_built'>What year was the property built?</label><input id='basic_report_year_built' name='basic_report[year_built]' placeholder='If unknown, use best estimated year' type='text'>
@@ -325,7 +328,11 @@ If you aren’t sure what your utility costs are, you may want to have access to
 								<input id='basic_report_years_owned' name='basic_report[years_owned]' placeholder='25' type='text'>
 							</div-->
 						</fieldset>";
+/************************************
+ *  END FORM STEP 2 - OLD RETROFIT  *
+ ************************************/
 			}
+
 			// Gather the property Details
 			$form .= "
 					<div class='actions'>
@@ -336,9 +343,14 @@ If you aren’t sure what your utility costs are, you may want to have access to
 			
 			$client = $_SESSION['client'];
 			// End Property
-			
+/********************************
+ *  END FORM STEP 2 - PROPERTY  *
+ ********************************/				
 		} else if($_GET['step'] == 'Property Details'){
-			$form = "<div id='free-report'>
+/******************************************
+ *  BEGIN FORM STEP 3 - PROPERTY DETAILS  *
+ ******************************************/	
+			$form = "
 <h4>The more information you can give us, the more accurate of a report we can generate for you.</h4>
 			<script>
 				Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
@@ -371,7 +383,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					})
 				})(jQuery)
 			</script>
-			<div id='free-report'>
+			
 				<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report' id='free_report' method='post' name='free_report'>
 					<input type='hidden' name='tokenized' value='$token'/>
 					<div style='margin:0;padding:0;display:inline'>
@@ -512,14 +524,57 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					</div>
 				</form>
 			</div>";
+		$sidebar = '';
+		if(isset($form) && strlen($form) > 0){
+			if(isset($client)){
+				$sidebar .= "<h2>Your Details:</h2>
+				<p>{$client['first_name']} {$client['last_name']}</p>
+				<p>{$client['email']}</p>";
+				if(strlen($client['home_phone']) > 0){
+					$sidebar .= "<p>h: {$client['home_phone']}</p>";
+				}
+				if(strlen($client['mobile_phone']) > 0){
+					$sidebar .= "<p>m: {$client['mobile_phone']}</p>";
+				}
+			}
+			if(isset($property)){
+				$sidebar .= "<h2>Property:</h2>
+				<p>{$property['address1']}";
+				if(strlen($property['address2']) > 0){
+					$sidebar .= " {$property['address2']}";
+				}
+				$sidebar .= "<br>
+				{$property['city']}, {$property['state']} {$property['zipcode']}</p>";
+			}
+			if(isset($basic_report)){
+				$temp = '';
+				if(strlen($basic_report['sqft']) > 0){
+					$temp .= "<p>Square Footage: {$basic_report['sqft']}";
+				}
+				if(strlen($basic_report['average_yearly_utilities']) > 0){
+					$temp .= "<p>Avg. Yearly Utilities: {$basic_report['average_yearly_utilities']}";
+				}
+				if(strlen($basic_report['year_built']) > 0){
+					$temp .= "<p>Year Built: {$basic_report['year_built']}";
+				}
+				if(strlen($temp) > 0 ){
+					$sidebar .= "<h2>Report Details:</h2>" . $temp . "<br><br><strong>What You Should Know:</strong><br>Typically most property upgrades don’t always realize an exact dollar-for-dollar cost on an appraisal valuation.  As an example, a new kitchen upgrade (average cost in the US is $50k) doesn’t usually appraise at cost.  The same came be said for other upgrades like swimming pools.  GEM chose to take a conservative approach in the incremental property value estimate – final value will depend on many factors and appraiser’s determination, and in some cases the owner may realize a full investment of costs and value.  The GEM beta appraisal program (tested in several U.S. regions) has realized an average of 78% of energy upgrade costs on appraisal valuations."  ;
+				}
+			}
+		}
 			
 			$client = $_SESSION['client'];
 			$property = $_SESSION['property'];
 			$basic_report = $_SESSION['basic_report'];
 			
 			// End Property Details
-			
+/******************************************
+ *  BEGIN FORM STEP 3 - PROPERTY DETAILS  *
+ ******************************************/			
 		} else if($_GET['step'] == 'Free Report'){
+/******************************
+ *  BEGIN FREE REPORT OUTPUT  *
+ ******************************/
 				$report = "<h1>Your Free Report</h1>";
 
 				$client = $_SESSION['client'];
@@ -759,7 +814,9 @@ If you aren’t sure what your utility costs are, you may want to have access to
 		}
 	} 
 }
-
+/****************************
+ *  END FREE REPORT OUTPUT  *
+ ****************************/
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-US" prefix="og: http://ogp.me/ns#"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en-US" prefix="og: http://ogp.me/ns#"> <![endif]-->
@@ -962,31 +1019,29 @@ If you aren’t sure what your utility costs are, you may want to have access to
 	<div id="content" class="container">
 		<div class="row">
 			<div class="main col-md-12" role="main">
-				<div class="entry-content" itemprop="mainContentOfPage">
-					<p id="notice"></p>
+				<div class="entry-content" itemprop="mainContentOfPage" style="background-color:#0000bb;"> 
+					<p id="notice"></p> 
 					<p id="alert"><? if(isset($errors)){ var_dump($errors); }?></p>
-<?php /*        </div>
-        <div class="col-md-12"> */ ?>
-					<div id="content" class="col-lg-9 col-md-8">
-						<div id='free-report'>
-							<? if(isset($form)){echo($form);} ?>
-						</div>
-					</div><!-- /#content -->
-            
-					<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary"> 
-						<div class="sidebar">
-							<? if(isset($sidebar)){echo($sidebar);} ?> 
-						</div><!-- /.sidebar -->
-					</aside><!-- /aside -->
+					<div id="content" class="col-lg-9 col-md-8" style="background-color:#bbbbbb;"> 
+						<div id='free-report-form' class='sidebar'>  
+							<? if(isset($form)){echo($form);} ?>  
+						</div> 
+					
+						<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
+							<div id='free-report-sidebar'> 	
+								<? if(isset($sidebar)){echo($sidebar);} ?> 
+							</div><!-- /.sidebar -->
+						</aside><!-- /aside -->
 		
-					<div class='free-report'> 
-						<? if(isset($report)){echo($report);} ?> 
-					</div> 
-				</div> 
+						<div id='free-report' style="background-color:#00bb00;"> 
+							<? if(isset($report)){echo($report);} ?> 
+						</div> 
+					</div><!-- /#content --> 
+				</div><!-- /.entry-content --> 
 			</div><!-- /.main --> 
-		</div><!-- /.row--> 
+		</div><!-- /.row-->  
         </div><!-- /.content --> 
-</div><!-- /.wrap --> 
+</div><!-- /.wrap -->  
 
 <footer id="containerfooter" class="footerclass" role="contentinfo">
 	<div class="container">
@@ -1008,11 +1063,11 @@ If you aren’t sure what your utility costs are, you may want to have access to
 				<li  class="menu-case-studies menu-item-984"><a href="http://www.greenenergy-money.com/casestudy/">Case Studies</a></li>
 				<li  class="menu-contact-us menu-item-985"><a href="http://www.greenenergy-money.com/contact-us/">Contact Us</a></li>
 			</ul>
-		</div>
+		</div><!-- /.footernav -->
 		<p>Copyright © 2015 | Green Energy Money </p>
 	</div><!-- /.footercredits -->
 </footer>
-		    </div><!--Wrapper-->
+		    </div><!--/.wrapper-->
   </body>
 
 <?php 
@@ -1021,4 +1076,3 @@ If you aren’t sure what your utility costs are, you may want to have access to
  *******************/
 ?>
 </html>
-
