@@ -245,9 +245,9 @@ If you aren’t sure what your utility costs are, you may want to have access to
 				<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report new_property' id='new_property' method='post' name='new_property'><input type='hidden' name='tokenized' value='$token'/>";
 			$interest = $_SESSION['property']['interest'];
 			if($interest == "old-retrofit" || $interest == "tear-down"){ // upgrade your home
-/**************************************************
+/*************************************************
  *  BEGIN FORM STEP 2[OLD RETROFIT OR TEARDOWN]  *
- **************************************************/	
+ *************************************************/	
 			$form .= "<fieldset>
 	<div class='field col-1'>
 		<legend><h4>What property are you interested in upgrading?</h4></legend>
@@ -328,9 +328,9 @@ If you aren’t sure what your utility costs are, you may want to have access to
 	</div-->
 </fieldset>
 <p></p>";
-/************************************
+/***********************************
  *  END FORM STEP 2[OLD RETROFIT]  *
- ************************************/
+ ***********************************/
 			}
 
 			// Gather the property Details
@@ -402,121 +402,9 @@ If you aren’t sure what your utility costs are, you may want to have access to
 								<option value='E-1'>Up to 100% or greater - to include Renewable Energy Power Generation.</option>
 							</select>
 						</div>
-	<!--					<div class='field'>
-							<h2>Budget</h2>
-							<p>$<span id='budget'></span></p>
-							
-							
-							
-							<p><em>RETROFIT COST ESTIMATION – these costs represent an estimated range of energy retrofits costs, they do not include adding square footage or conventional upgrades, i.e., new bathrooms or kitchens.  The estimated range represents potential increases in costs based on regional labor and materials.  A breakdown of  project costs and specifications will be finalized, based on approved contractors bids, once contracts are fully initiated, and upon acceptance of all terms and conditions.   </em></p>
-	<!--					</div>
-						<!--div class='field'>
-							<label for='basic_report_level_of_comfort'>Are all rooms an even temperature?</label><br>
-							<select name='basic_report[level_of_comfort]'>
-								<option>No</option>
-								<option>Yes</option>
-							</select>
-						</div-->
+					<!-- INSERT FIELDSET2 -->
 					</fieldset>
-					<!--div class='field'>
-						<label for='basic_report_priority_of_upgrade'>What is your highest priority for the energy upgrades?</label><br>
-						<select id='basic_report_priority_of_upgrade' name='basic_report[level_of_comfort]'>
-							<option></option>
-							<option>Comfort</option>
-							<option>Cost, affordability</option>
-							<option>Investment value, quality of improvements</option>
-							<option>Reducing energy bills</option>
-						</select>
-					</div>
-					<div class='field'>
-						<label for='basic_report_ease_of_process'>When would you like to be fully upgraded?</label><br>
-						<select id='basic_report_ease_of_process' name='basic_report[ease_of_process]'>
-							<option></option>
-							<option>As soon as possible</option>
-							<option>In the next year</option>
-							<option>In the next couple years</option>
-						</select>
-					</div>
-					<div class='field'>
-						<label for='basic_report_budget'>What is your budget?</label><br>
-						<ul>
-							<li>
-								<input type='radio' name='basic_report[budget]' value='5000' /><label for='radio_73'> $0 - $5,000</label>
-							</li>                 
-							<li>                  
-								<input type='radio' name='basic_report[budget]' value='10000' /><label for='radio_74'>$5,001 - $10,000</label>
-							</li>                 
-							<li>                  
-								<input type='radio' name='basic_report[budget]' value='25000' /><label for='radio_75'>$10,001 - $25,000</label>
-							</li>                 
-							<li>                  
-								<input type='radio' name='basic_report[budget]' value='50000' /><label for='radio_76'>$25,001 - $50,000</label>
-							</li>                 
-							<li>                  
-								<input type='radio' name='basic_report[budget]' value='100000' /><label for='radio_77'>$50,001 - $100,000</label>
-							</li>                 
-							<li>                  
-								<input type='radio' name='basic_report[budget]' value='100001' /><label for='radio_78'>No limit. I want to explore all options for high performance upgrades</label>
-							</li>
-						</ul>
-					</div-->
-					<!--div class='field'>
-						<p>What upgrades are you interested in?</p>
-						<ul>
-							<li>
-								<input name='basic_report[insulation]' type='hidden' value='0'><input id='basic_report_insulation' name='basic_report[insulation]' type='checkbox' value='1'>
-								<label for='basic_report_insulation'>Insulation</label>
-							</li>
-							<li>
-								<input name='basic_report[hvac_system]' type='hidden' value='0'><input id='basic_report_hvac_system' name='basic_report[hvac_system]' type='checkbox' value='1'>
-								<label for='basic_report_hvac_system'>Hvac system</label>
-							</li>
-							<li>
-								<input name='basic_report[radiant_barrier]' type='hidden' value='0'><input id='basic_report_radiant_barrier' name='basic_report[radiant_barrier]' type='checkbox' value='1'>
-								<label for='basic_report_radiant_barrier'>Radiant barrier</label>
-							</li>
-							<li>
-								<input name='basic_report[lighting]' type='hidden' value='0'><input id='basic_report_lighting' name='basic_report[lighting]' type='checkbox' value='1'>
-								<label for='basic_report_lighting'>Lighting</label>
-							</li>
-							<li>
-								<input name='basic_report[appliances]' type='hidden' value='0'><input id='basic_report_appliances' name='basic_report[appliances]' type='checkbox' value='1'>
-								<label for='basic_report_appliances'>Appliances</label>
-							</li>
-							<li>
-								<input name='basic_report[solar_film_on_windows]' type='hidden' value='0'><input id='basic_report_solar_film_on_windows' name='basic_report[solar_film_on_windows]' type='checkbox' value='1'>
-								<label for='basic_report_solar_film_on_windows'>Solar film on windows</label>
-							</li>
-							<li>
-								<input name='basic_report[building_envelope_retrofit]' type='hidden' value='0'><input id='basic_report_building_envelope_retrofit' name='basic_report[building_envelope_retrofit]' type='checkbox' value='1'>
-								<label for='basic_report_building_envelope_retrofit'>Building envelope retrofit</label>
-							</li>
-							<li>
-								<input name='basic_report[windows]' type='hidden' value='0'><input id='basic_report_windows' name='basic_report[windows]' type='checkbox' value='1'>
-								<label for='basic_report_windows'>Windows</label>
-							</li>
-							<li>
-								<input name='basic_report[solar_hot_water]' type='hidden' value='0'><input id='basic_report_solar_hot_water' name='basic_report[solar_hot_water]' type='checkbox' value='1'>
-								<label for='basic_report_solar_hot_water'>Solar hot water</label>
-							</li>
-							<li>
-								<input name='basic_report[roof_radiant]' type='hidden' value='0'><input id='basic_report_roof_radiant' name='basic_report[roof_radiant]' type='checkbox' value='1'>
-								<label for='basic_report_roof_radiant'>Roof radiant</label>
-							</li>
-							<li>
-								<input name='basic_report[solar]' type='hidden' value='0'><input id='basic_report_solar' name='basic_report[solar]' type='checkbox' value='1'>
-								<label for='basic_report_solar'>Solar</label>
-							</li>
-							<li>
-								<input name='basic_report[rainwater_harvesting_system]' type='hidden' value='0'><input id='basic_report_rainwater_harvesting_system' name='basic_report[rainwater_harvesting_system]' type='checkbox' value='1'>
-								<label for='basic_report_rainwater_harvesting_system'>Rainwater harvesting system</label>
-							</li>
-							<li>
-								<input name='basic_report[water_recycling]' type='hidden' value='0'><input id='basic_report_water_recycling' name='basic_report[water_recycling]' type='checkbox' value='1'>
-								<label for='basic_report_water_recycling'>Water recycling</label>
-							</li>
-						</ul>
-					</div-->
+					<!-- INSERT FIELDSET1 -->
 					<div class='actions'>
 						<input name='action' type='submit' value='Get Your Free Report'>
 					</div>
@@ -705,12 +593,13 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					<span id='dated'>Compiled on " . date('M d, Y',time()) . "</span>
 					<img src='http://www.greenenergy-money.com/free-report/images/eco_house_graphics/cutouts/house_view.jpg' width='300' height='272' alt='House View' class='alignleft'>
 					<div class='primary-attributes'>
+TEST
 						<span class='tooltip' data-tooltip='This is the potential rating level of the energy efficiency and future building
 						performance. Range from E1+ (best) through E5 (lowest).'><span class='label'>Energy Efficiency Level</span> <span class='data'>" . $basic_report_pt2['level_of_efficiency'] . "</span></span>
 
 						<span class='tooltip' data-tooltip='The stage of upgrade depends on budget, types of building insulation and renewable energy measures -Weatherization, Light Retrofit, Deep Retrofit, Net Zero, &amp;	Net Zero Plus'><span class='label'>Type of Energy Improvement</span> <span class='data'>" . $property_renew_type . "</span></span>
 
-						<span class='tooltip' data-tooltip='Estimated cost of the improvements you want based on your selections in the questionnaire.'><span class='label'>Upgrade Budget Range*</span> <span class='data'>\$" . number_format($property_median_budget[0], 2) . " - $" . number_format($property_median_budget[1], 2) . "</span></span>
+						<span class='tooltip' data-tooltip='Estimated cost of the improvements  you want based on your selections in the questionnaire.'><span class='label'>Upgrade Budget Range*</span> <span class='data'>\$" . number_format($property_median_budget[0], 2) . " - $" . number_format($property_median_budget[1], 2) . "</span></span>
 
 						<span class='tooltip' data-tooltip='Estimated value of property after improvements are completed, calculated using range of utility cost savings at Present Value of 20 years.'><span class='label'>Estimated increase in property value.</span> <span class='data'>\$" . number_format($ipv_lo, 2) . "  -  \$" . number_format($ipv_hi, 2) . "</span></span>
 					</div>
@@ -796,6 +685,23 @@ If you aren’t sure what your utility costs are, you may want to have access to
   
 <link rel='stylesheet' href='report.css' type='text/css' media='all' />  
 <script type='text/javascript' src='main.js?ver=1.0.0'></script>    
+
+
+
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-content/themes/responsive/core/js/responsive-modernizr.js?ver=2.6.1'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.widget.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.button.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.mouse.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.resizable.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.draggable.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.position.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.dialog.min.js?ver=1.10.3'></script>
+		<script type='text/javascript' src='main.js?ver=1.0.0'></script>
+
+
+
   
 <!-- This site is optimized with the Yoast WordPress SEO plugin v2.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
 <!-- Admin only notice: this page doesn't show a meta description because it doesn't have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template. -->
