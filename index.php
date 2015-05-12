@@ -641,8 +641,6 @@ If you aren’t sure what your utility costs are, you may want to have access to
 								</span>
 							</span>
 						</span>
-
-						
 					</div>
 					<div class='salespitch'>
 						<span class='tooltip tooltip-effect-1'>
@@ -813,15 +811,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 <!-- Dynamic Widgets by QURL - http://www.qurl.nl //-->
 <style type="text/css">.broken_link, a.broken_link {
 	text-decoration: line-through;
-}</style><style type="text/css" media="print">#wpadminbar { display:none; }</style>
-<style type="text/css" media="screen">
-	html { margin-top: 32px !important; }
-	* html body { margin-top: 32px !important; }
-	@media screen and ( max-width: 782px ) {
-		html { margin-top: 46px !important; }
-		* html body { margin-top: 46px !important; }
-	}
-</style>
+}
 <!--[if lt IE 9]>
 <script src="http://www.greenenergy-money.com/wp-content/themes/virtue/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
@@ -931,24 +921,24 @@ If you aren’t sure what your utility costs are, you may want to have access to
 	<div id="content" class="container">
 		<div class="row">
 			<div class="main col-md-12" role="main">
-				<div class="entry-content" itemprop="mainContentOfPage" style="background-color:#0000bb;"> 
+				<div class="entry-content" itemprop="mainContentOfPage"> 
 					<p id="notice"></p> 
 					<p id="alert"><? if(isset($errors)){ var_dump($errors); }?></p>
 					
 					<?php if (isset($form) && strlen($form) > 0): ?>
-						<div id='content' class='col-lg-9 col-md-8' style='background-color:#bbbbbb;'> 
+						<div id='content' class='col-lg-9 col-md-8'> 
 							<div id='free-report-form' class='sidebar'>
 						<? echo($form); ?>  
 							</div>
 						</div><!-- /#content --> 
-						<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
+						<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary"> 
 							<div id='free-report-sidebar'> 	
 								<? if(isset($sidebar)){echo($sidebar);} ?> 
 							</div><!-- /.sidebar -->
 						</aside><!-- /aside -->
 					<?php elseif (isset($report) && strlen($report) > 0): ?>
-						<div id='content' class=' col-md-12' style='background-color:#bbbbbb;'> 
-							<div id='free-report' style='background-color:#00bb00;'> 
+						<div id='content' class=' col-md-12'> 
+							<div id='free-report'> 
 								<?php echo($report); ?> 
 							</div> 
 						</div>
