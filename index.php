@@ -593,18 +593,69 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					<span id='dated'>Compiled on " . date('M d, Y',time()) . "</span>
 					<img src='http://www.greenenergy-money.com/free-report/images/eco_house_graphics/cutouts/house_view.jpg' width='300' height='272' alt='House View' class='alignleft'>
 					<div class='primary-attributes'>
-TEST
-						<span class='tooltip' data-tooltip='This is the potential rating level of the energy efficiency and future building
-						performance. Range from E1+ (best) through E5 (lowest).'><span class='label'>Energy Efficiency Level</span> <span class='data'>" . $basic_report_pt2['level_of_efficiency'] . "</span></span>
 
-						<span class='tooltip' data-tooltip='The stage of upgrade depends on budget, types of building insulation and renewable energy measures -Weatherization, Light Retrofit, Deep Retrofit, Net Zero, &amp;	Net Zero Plus'><span class='label'>Type of Energy Improvement</span> <span class='data'>" . $property_renew_type . "</span></span>
+						<span class='tooltip tooltip-effect-1'>
+							<span class='tooltip-item'> 
+								<span class='label'>Energy Efficiency Level</span>
+								<span class='data'>" . $basic_report_pt2['level_of_efficiency'] . "</span> 
+							</span> 
+							<span class='tooltip-content clearfix'>  
+								<span class='tooltip-text'>
+									This is the potential rating level of the energy efficiency and future building performance. Range from E1+ (best) through E5 (lowest).
+								</span>
+							</span>
+						</span>
 
-						<span class='tooltip' data-tooltip='Estimated cost of the improvements  you want based on your selections in the questionnaire.'><span class='label'>Upgrade Budget Range*</span> <span class='data'>\$" . number_format($property_median_budget[0], 2) . " - $" . number_format($property_median_budget[1], 2) . "</span></span>
+						<span class='tooltip tooltip-effect-1'>
+							<span class='tooltip-item'>
+								<span class='label'>Type of Energy Improvement</span>
+								<span class='data'>" . $property_renew_type . "</span> 
+							</span> 
+							<span class='tooltip-content clearfix'>  
+								<span class='tooltip-text'> 
+									The stage of upgrade depends on budget, types of building insulation and renewable energy measures - Weatherization, Light Retrofit, Deep Retrofit, Net Zero, &amp; Net Zero Plus.
+								</span>
+							</span>
+						</span>
+						
+						<span class='tooltip tooltip-effect-1'>
+							<span class='tooltip-item'>
+								<span class='label'>Upgrade Budget Range*</span>
+								<span class='data'>\$" . number_format($property_median_budget[0], 2) . " - $" . number_format($property_median_budget[1], 2) . "</span>
+							</span>
+							<span class='tooltip-content clearfix'>   
+								<span class='tooltip-text'> 
+									The stage of upgrade depends on budget, types of building insulation and renewable energy measures - Weatherization, Light Retrofit, Deep Retrofit, Net Zero, &amp; Net Zero Plus.
+								</span>
+							</span>
+						</span>
 
-						<span class='tooltip' data-tooltip='Estimated value of property after improvements are completed, calculated using range of utility cost savings at Present Value of 20 years.'><span class='label'>Estimated increase in property value.</span> <span class='data'>\$" . number_format($ipv_lo, 2) . "  -  \$" . number_format($ipv_hi, 2) . "</span></span>
+						<span class='tooltip tooltip-effect-1'>
+							<span class='tooltip-item'>
+								<span class='label'>Estimated increase in property value</span>
+								<span class='data'>\$" . number_format($ipv_lo, 2) . "  -  \$" . number_format($ipv_hi, 2) . "</span>
+							</span>
+							<span class='tooltip-content clearfix'>  
+								<span class='tooltip-text'> 
+									Estimated value of property after improvements are completed, calculated using range of utility cost savings at Present Value of 20 years.
+								</span>
+							</span>
+						</span>
+
+						
 					</div>
 					<div class='salespitch'>
-						<span class='tooltip' data-tooltip='With GEM Methods, you can reduce the length of your loan by using savings from your utility bills!'><span class='label'>Pay off your improvement cost (20 years loan assumed) in approximately</span> <span class='data' style='margin-top:8px;margin-bottom:8px'>" .  number_format($payback_low, 1)  . " - " .  number_format($payback_hi, 1)  . " Years</span> When you apply your energy savings to the loan</span>
+						<span class='tooltip tooltip-effect-1'>
+							<span class='tooltip-item'>
+								<span class='label'>Pay off your improvement cost (20 years loan assumed) in approximately</span>
+								<span class='data' style='margin-top:8px;margin-bottom:8px'>" .  number_format($payback_low, 1)  . " - " .  number_format($payback_hi, 1)  . " Years</span>When you apply your energy savings to the loan
+							</span>
+							<span class='tooltip-content wide clearfix'>  
+								<span class='tooltip-text'> 
+									With GEM Methods, you can reduce the length of your loan by using savings from your utility bills!
+								</span>
+							</span>
+						</span>				
 					</div>
 
 					";
@@ -683,7 +734,6 @@ TEST
     <title>The Free Report - Green Energy Money</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<link rel='stylesheet' href='report.css' type='text/css' media='all' />  
 <script type='text/javascript' src='main.js?ver=1.0.0'></script>    
 
 
@@ -724,16 +774,9 @@ TEST
 <link rel="alternate" type="application/rss+xml" title="Green Energy Money &raquo; The Free Report Comments Feed" href="http://www.greenenergy-money.com/?page_id=1100/feed/" />
 <link rel='stylesheet' id='jquery.bxslider-css'  href='http://www.greenenergy-money.com/wp-content/plugins/bxslider-integration/assets/css/bxslider-integration.min.css?ver=4.1.4' type='text/css' media='all' />
 <link rel='stylesheet' id='open-sans-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.1.4' type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css'  href='http://www.greenenergy-money.com/wp-includes/css/dashicons.min.css?ver=4.1.4' type='text/css' media='all' />
-<link rel='stylesheet' id='admin-bar-css'  href='http://www.greenenergy-money.com/wp-includes/css/admin-bar.min.css?ver=4.1.4' type='text/css' media='all' />
-<link rel='stylesheet' id='contact-form-7-css'  href='http://www.greenenergy-money.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.1.2' type='text/css' media='all' />
 <link rel='stylesheet' id='boxes-css'  href='http://www.greenenergy-money.com/wp-content/plugins/wordpress-seo/css/adminbar.min.css?ver=2.1.1' type='text/css' media='all' />
 <link rel='stylesheet' id='parent-style-css'  href='http://www.greenenergy-money.com/wp-content/themes/virtue/style.css?ver=4.1.4' type='text/css' media='all' />
 <link rel='stylesheet' id='dd_custom_style-css'  href='http://www.greenenergy-money.com/wp-content/themes/GEM%20Child/dd_style.css?ver=4.1.4' type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-styles-css'  href='http://www.greenenergy-money.com/wp-content/plugins/font-awesome/assets/css/font-awesome.min.css?ver=3.2.1' type='text/css' media='all' />
-<!--[if lte IE 7]>
-<link rel='stylesheet' id='font-awesome-ie7-css'  href='http://www.greenenergy-money.com/wp-content/plugins/font-awesome/assets/css/font-awesome-ie7.min.css?ver=3.2.1' type='text/css' media='all' />
-<![endif]-->
 <link rel='stylesheet' id='kadence_theme-css'  href='http://www.greenenergy-money.com/wp-content/themes/virtue/assets/css/virtue.css?ver=246' type='text/css' media='all' />
 <link rel='stylesheet' id='virtue_skin-css'  href='http://www.greenenergy-money.com/wp-content/themes/virtue/assets/css/skins/default.css' type='text/css' media='all' />
 <link rel='stylesheet' id='roots_child-css'  href='http://www.greenenergy-money.com/wp-content/themes/GEM%20Child/style.css' type='text/css' media='all' />
@@ -755,14 +798,13 @@ TEST
 <script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.11.2'></script>
 <script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/position.min.js?ver=1.11.2'></script>
 <script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/dialog.min.js?ver=1.11.2'></script>
-<script type='text/javascript' src='http://www.greenenergy-money.com/wp-content/plugins/gem-calculators/gem-calculators.js?ver=1.0'></script>
-<style type="text/css" media="screen">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }</style>
+</script>
+
 <style type="text/css">#logo {padding-top:25px;}#logo {padding-bottom:10px;}#logo {margin-left:0px;}#logo {margin-right:0px;}#nav-main {margin-top:40px;}#nav-main {margin-bottom:10px;}.headerfont, .tp-caption {font-family:Lato;} 
   .topbarmenu ul li {font-family:Lato;}
-  #kadbreadcrumbs {font-family:Verdana, Geneva, sans-serif;}.home-message:hover {background-color:#193874; background-color: rgba(25, 56, 116, 0.6);}
-  nav.woocommerce-pagination ul li a:hover, .wp-pagenavi a:hover, .panel-heading .accordion-toggle, .variations .kad_radio_variations label:hover, .variations .kad_radio_variations label.selectedValue {border-color: #193874;}
-  a, #nav-main ul.sf-menu ul li a:hover, .product_price ins .amount, .price ins .amount, .color_primary, .primary-color, #logo a.brand, #nav-main ul.sf-menu a:hover,
-  .woocommerce-message:before, .woocommerce-info:before, #nav-second ul.sf-menu a:hover, .footerclass a:hover, .posttags a:hover, .subhead a:hover, .nav-trigger-case:hover .kad-menu-name, 
+
+
+ #nav-second ul.sf-menu a:hover, .footerclass a:hover, .posttags a:hover, .subhead a:hover, .nav-trigger-case:hover .kad-menu-name, 
   .nav-trigger-case:hover .kad-navbtn, #kadbreadcrumbs a:hover, #wp-calendar a, .star-rating {color: #193874;}
 .widget_price_filter .ui-slider .ui-slider-handle, .product_item .kad_add_to_cart:hover, .product_item:hover a.button:hover, .product_item:hover .kad_add_to_cart:hover, .kad-btn-primary, html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li a:hover, html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a,
 .product-category.grid_item a:hover h5, .woocommerce-message .button, .widget_layered_nav_filters ul li a, .widget_layered_nav ul li.chosen a, .wpcf7 input.wpcf7-submit, .yith-wcan .yith-wcan-reset-navigation,
@@ -783,7 +825,11 @@ TEST
 <!--[if lt IE 9]>
 <script src="http://www.greenenergy-money.com/wp-content/themes/virtue/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
-<style type="text/css" title="dynamic-css" class="options-output">header #logo a.brand,.logofont{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:32px;}.kad_tagline{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;color:#444444;font-size:14px;}.product_item .product_details h5{font-family:Lato;line-height:20px;font-weight:700;font-style:normal;font-size:16px;}h1{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:38px;}h2{font-family:Lato;line-height:40px;font-weight:normal;font-style:normal;font-size:32px;}h3{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:28px;}h4{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:24px;}h5{font-family:Lato;line-height:24px;font-weight:700;font-style:normal;font-size:18px;}body{font-family:Verdana, Geneva, sans-serif;line-height:20px;font-weight:400;font-style:normal;font-size:14px;}#nav-main ul.sf-menu a{font-family:Lato;line-height:18px;font-weight:700;font-style:normal;color:#193874;font-size:16px;}#nav-second ul.sf-menu a{font-family:Lato;line-height:22px;font-weight:400;font-style:normal;font-size:18px;}.kad-nav-inner .kad-mnav, .kad-mobile-nav .kad-nav-inner li a,.nav-trigger-case{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;font-size:16px;}</style></head>
+<style type="text/css" title="dynamic-css" class="options-output">header #logo a.brand,.logofont{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:32px;}.kad_tagline{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;color:#444444;font-size:14px;}.product_item .product_details h5{font-family:Lato;line-height:20px;font-weight:700;font-style:normal;font-size:16px;}h1{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:38px;}h2{font-family:Lato;line-height:40px;font-weight:normal;font-style:normal;font-size:32px;}h3{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:28px;}h4{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:24px;}h5{font-family:Lato;line-height:24px;font-weight:700;font-style:normal;font-size:18px;}body{font-family:Verdana, Geneva, sans-serif;line-height:20px;font-weight:400;font-style:normal;font-size:14px;}#nav-main ul.sf-menu a{font-family:Lato;line-height:18px;font-weight:700;font-style:normal;color:#193874;font-size:16px;}#nav-second ul.sf-menu a{font-family:Lato;line-height:22px;font-weight:400;font-style:normal;font-size:18px;}.kad-nav-inner .kad-mnav, .kad-mobile-nav .kad-nav-inner li a,.nav-trigger-case{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;font-size:16px;}</style>
+
+<link rel='stylesheet' href='report.css' type='text/css' media='all' />  
+<link rel='stylesheet' href='css/tooltip-box.css' type='text/css' media='all' /> 
+</head>
 <?php 
 /*******************
  *  END HTML HEAD  *
@@ -888,19 +934,29 @@ TEST
 				<div class="entry-content" itemprop="mainContentOfPage" style="background-color:#0000bb;"> 
 					<p id="notice"></p> 
 					<p id="alert"><? if(isset($errors)){ var_dump($errors); }?></p>
-					<div id="content" class="col-lg-9 col-md-8" style="background-color:#bbbbbb;"> 
-						<div id='free-report-form' class='sidebar'>  
-							<? if(isset($form)){echo($form);} ?>  
-						</div> 
-						<div id='free-report' style="background-color:#00bb00;"> 
-							<? if(isset($report)){echo($report);} ?> 
-						</div> 
-					</div><!-- /#content --> 
-					<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
-						<div id='free-report-sidebar'> 	
-							<? if(isset($sidebar)){echo($sidebar);} ?> 
-						</div><!-- /.sidebar -->
-					</aside><!-- /aside -->
+					
+					<?php if (isset($form) && strlen($form) > 0): ?>
+						<div id='content' class='col-lg-9 col-md-8' style='background-color:#bbbbbb;'> 
+							<div id='free-report-form' class='sidebar'>
+						<? echo($form); ?>  
+							</div>
+						</div><!-- /#content --> 
+						<aside class="col-lg-3 col-md-4 kad-sidebar" role="complementary" style="background-color:#bb0000;"> 
+							<div id='free-report-sidebar'> 	
+								<? if(isset($sidebar)){echo($sidebar);} ?> 
+							</div><!-- /.sidebar -->
+						</aside><!-- /aside -->
+					<?php elseif (isset($report) && strlen($report) > 0): ?>
+						<div id='content' class=' col-md-12' style='background-color:#bbbbbb;'> 
+							<div id='free-report' style='background-color:#00bb00;'> 
+								<?php echo($report); ?> 
+							</div> 
+						</div>
+					<?php else : ?>
+						ERROR
+					<?php endif; ?>
+					
+					
 				</div><!-- /.entry-content --> 
 			</div><!-- /.main --> 
 		</div><!-- /.row-->  
