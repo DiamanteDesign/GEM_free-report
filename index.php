@@ -127,25 +127,7 @@ if(isset($_POST['action'])){
 			$sql = "UPDATE gem_basic_reports SET level_of_efficiency = :level_of_efficiency, updated_at = NOW() WHERE id = {$_SESSION['basic_report']['id']}"; //,level_of_comfort = :level_of_comfort,level_of_comfort = :level_of_comfort,ease_of_process = :ease_of_process,budget = :budget,insulation = :insulation,hvac_system = :hvac_system,radiant_barrier = :radiant_barrier,lighting = :lighting,appliances = :appliances,solar_film_on_windows = :solar_film_on_windows,building_envelope_retrofit = :building_envelope_retrofit,windows = :windows,solar_hot_water = :solar_hot_water,roof_radiant = :roof_radiant,solar = :solar,rainwater_harvesting_system = :rainwater_harvesting_system,water_recycling = :water_recycling,
 			$q = $DBH->prepare($sql); 
 			$q->execute(array(
-					':level_of_efficiency' => $_POST['basic_report']['level_of_efficiency'],
-					/*':level_of_comfort' => $_POST['basic_report']['level_of_comfort'],
-					':level_of_comfort' => $_POST['basic_report']['level_of_comfort'],
-					':ease_of_process' => $_POST['basic_report']['ease_of_process'],
-					':budget' => $_POST['basic_report']['budget'],
-					':insulation' => $_POST['basic_report']['insulation'],
-					':hvac_system' => $_POST['basic_report']['hvac_system'],
-					':radiant_barrier' => $_POST['basic_report']['radiant_barrier'],
-					':lighting' => $_POST['basic_report']['lighting'],
-					':appliances' => $_POST['basic_report']['appliances'],
-					':solar_film_on_windows' => $_POST['basic_report']['solar_film_on_windows'],
-					':building_envelope_retrofit' => $_POST['basic_report']['building_envelope_retrofit'],
-					':windows' => $_POST['basic_report']['windows'],
-					':solar_hot_water' => $_POST['basic_report']['solar_hot_water'],
-					':roof_radiant' => $_POST['basic_report']['roof_radiant'],
-					':solar' => $_POST['basic_report']['solar'],
-					':rainwater_harvesting_system' => $_POST['basic_report']['rainwater_harvesting_system'],
-					':water_recycling' => $_POST['basic_report']['water_recycling']*/
-				)
+					':level_of_efficiency' => $_POST['basic_report']['level_of_efficiency'])
 			);
 			$_SESSION['basic_report_pt2'] = $_POST['basic_report'];
 			$step = "Free Report";
@@ -169,10 +151,11 @@ if(isset($_POST['action'])){
 	<li class='col-1-3'><h5>Step 2</h5></li>
 	<li class='col-1-3 last'><h5>Step 3</h5></li>
 </ul>
-		<h2>To get your Free Report, simply get started now on the questionnaire below!</h2>
 		
-			<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report' method='post' name='free-report'>
-				<input type='hidden' name='tokenized' value='$token'/>
+		
+			<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report' method='post' name='free-report'><input type='hidden' name='tokenized' value='$token'/>
+			<fieldset>
+				<legend>To get your Free Report, simply get started now on the questionnaire below!</legend>
 				<div class='field col-1-2'>
 					<label for='client_first_name'>First name</label><input type='text' id='client_first_name' name='client[first_name]' required placeholder=''>
 				</div>
@@ -195,20 +178,13 @@ if(isset($_POST['action'])){
 					</select>
 				</div> 
 
-                                <div class='field col-1'>
-					<label for='property_interest'>property_interest</label><select id='property_interest' name='property[interest]'>
-						<option value='old-retrofit'>old-retrofit</option>
-						<option value='tear-down'>tear-down</option>
-						<option value='new-retrofit'>new-retrofit</option>
-						<option value='new-construction'>new-construction</option>
-					</select>
-				</div>
-
-				<!--input id='property_interest' name='property[interest]' value='old-retrofit' type='hidden'-->
+				<input id='property_interest' name='property[interest]' value='old-retrofit' type='hidden'>
 				
 				<div class='actions'>
 					<input name='action' type='submit' value='Continue to step 2'>
 				</div>
+
+			</fieldset>
 			</form>";
 
 /*********************************
@@ -249,9 +225,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
  *  BEGIN FORM STEP 2[OLD RETROFIT OR TEARDOWN]  *
  *************************************************/	
 			$form .= "<fieldset>
-	<div class='field col-1'>
-		<legend><h4>What property are you interested in upgrading?</h4></legend>
-	</div>
+	<legend>What property are you interested in upgrading?</legend>
 	<div class='field col-1 address'>
 		<label for='property_address1'>Address</label><input id='property_address1' name='property[address1]' required placeholder='' type='text'>
 	</div>
@@ -279,24 +253,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 /*********************************************************
  *  BEGIN FORM STEP 2[NEW RETROFIT OR NEW CONSTRUCTION]  *
  *********************************************************/
-				$form .= "<fieldset>
-	<div class='field col-1'>
-		<legend></h4>Where are you looking for a property?</h4></legend>
-	</div>
-	<div class='field city'>
-		<label for='property_city'>City</label><input id='property_city' name='property[city]' required='' placeholder='' type='text' />
-	</div>
-	<div class='field state'>
-		<label for='property_state'>State</label><input id='property_state' name='property[state]' required='' placeholder='' type='text' />
-	</div>
-	<div class='field zip'>
-		<label for='property_zipcode'>Zipcode</label><input id='property_zipcode' name='property[zipcode]' placeholder='' type='text' />
-	</div>
-	<div class='field'>
-		<label for='property_price_range'>What is your price range?</label><input id='property_price_range' name='property[price_range]' type='text' placeholder='$120,000-$250,000'>
-	</div>
-</fieldset>
-<p></p>";
+				$form .= "";
 /*******************************************************
  *  END FORM STEP 2[NEW RETROFIT OR NEW CONSTRUCTION]  *
  *******************************************************/
@@ -308,9 +265,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
  *  BEGIN FORM STEP 2[OLD RETROFIT]  *
  *************************************/
 				$form .= "<fieldset>
-	<div class='field col-1'>
-		<legend>Property Details:</legend> 
-	</div>
+	<legend>Property Details:</legend> 
 	<div class='field col-1 details'>
 		<label for='basic_report_year_built'>What year was the property built?</label><input id='basic_report_year_built' name='basic_report[year_built]' placeholder='If unknown, use best estimated year' type='text'>
 	</div>
@@ -349,7 +304,11 @@ If you aren’t sure what your utility costs are, you may want to have access to
 /******************************************
  *  BEGIN FORM STEP 3 - PROPERTY DETAILS  *
  ******************************************/	
-			$form = "<h4>The more information you can give us, the more accurate of a report we can generate for you.</h4>
+			$form = "<ul class='row steps'>
+	<li class='col-1-3'><h5>Step 1</h5></li>
+	<li class='col-1-3'><h5>Step 2</h5></li>
+	<li class='col-1-3 current last'><h5>Step 3</h5></li>
+</ul>
 			<script>
 				Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
 				    var n = this,
@@ -388,12 +347,8 @@ If you aren’t sure what your utility costs are, you may want to have access to
 						<input name='utf8' type='hidden' value='✓'>
 					</div>
 					<fieldset>
-						<legend><h4>Current state of the property</h4></legend>
-						<!--div class='field'>
-							<label for='basic_report_current_upgrades'>Have you already upgraded this property?  If so can you tell us what you've done?</label><br>
-							<textarea id='basic_report_current_upgrades' name='basic_report[current_upgrades]' placeholder='Can you give us deails?'></textarea>
-						</div-->
-						<div class='radioset'>
+						<legend>Current state of the property</legend>
+						<div class='radioset field'>
 							<label for='basic_report_level_of_efficiency'>What are field energy efficiency - reduction goals and, if applicable, energy production goals? Keep in mind, If you're planning to install renewable systems, your property should be very efficient before energy production is financially viable.</label>
 							<select id='basic_report_level_of_efficiency' name='basic_report[level_of_efficiency]'>
 								<option value='E-4'>Up to 25% - Weatherization.</option>
@@ -402,9 +357,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 								<option value='E-1'>Up to 100% or greater - to include Renewable Energy Power Generation.</option>
 							</select>
 						</div>
-					<!-- INSERT FIELDSET2 -->
 					</fieldset>
-					<!-- INSERT FIELDSET1 -->
 					<div class='actions'>
 						<input name='action' type='submit' value='Get Your Free Report'>
 					</div>
@@ -588,10 +541,10 @@ If you aren’t sure what your utility costs are, you may want to have access to
 				$payback_low = payback_rate($property_median_budget[0], $es_m*$saving[$basic_report_pt2['level_of_efficiency']][0]);
 				
 				$report = "
-					<h1 class='report-title'>Free GEM Retrofit Estimation</h1>
+					<h3 class='report-title'>GEM Retrofit Estimation</h3>
 				<div class='entry-content'>
 					<span id='dated'>Compiled on " . date('M d, Y',time()) . "</span>
-					<img src='http://www.greenenergy-money.com/free-report/images/eco_house_graphics/cutouts/house_view.jpg' width='300' height='272' alt='House View' class='alignleft'>
+					<img src='http://www.greenenergy-money.com/free-report/images/eco_house_graphics/cutouts/house_view.jpg' width='285' height='259' alt='House View' class='alignleft'>
 					<div class='primary-attributes'>
 
 						<span class='tooltip tooltip-effect-1'>
@@ -657,11 +610,6 @@ If you aren’t sure what your utility costs are, you may want to have access to
 					</div>
 
 					";
-					/* <span class='tooltip' data-tooltip=''>Without Energy Savings Applied</span>
-						<!--span class='tooltip' data-tooltip=''>Interest Cost Savings : $" .  number_format($int_savings_lo, 2)  . "</span><br />
-						<span class='tooltip' data-tooltip='Your estimated property value increase (IPV) and loan interest savings with GEM's Methods. (For more detailed info go to GEM’s free calculators or buy the Book &amp; Paid Report)'>Total Equity + Savings : $" .  number_format($equity_savings_lo, 2)  . "  to  $" .   number_format($equity_savings_hi, 2)  . "</span><br /-->
-						<span class='tooltip' data-tooltip='With GEM Methods, you can reduce the length of your loan by using savings from your utility bills!'><span class='label'>Payoff  (20 year term)</span> <span class='data'>" .  number_format($payback_lo, 1)  . " Years</span></span> */ 
-			/*$report .="					<span class='tooltip center' data-tooltip='Amount of cost–to-property value'>Cost-to-Value Percentage : <span class='data'>" .  number_format(100*$ipv_lo/$property_median_budget[1], 1) . "% to  " .  number_format(100*$ipv_hi/$property_median_budget[0], 1)  . "%</span> </span> */
 
 					$report .= "<p class='cleared'><em>Subject to inspection, contractor recommendations, pricing, final loan, interest rate approval. Estimated costs vary on property condition, age, region, occupancy, and other factors. This is not a formal proposal. Rates and costs subject to market conditions.</em></p>
 					<p style='margin-top: 30px;'><strong>IMPORTANT! Make sure to document past utility costs and get a qualified HERS audit to obtain a valuation that a lender will accept.</strong></p>
@@ -735,7 +683,6 @@ If you aren’t sure what your utility costs are, you may want to have access to
 <script type='text/javascript' src='main.js?ver=1.0.0'></script>    
 
 
-
 		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
 		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-content/themes/responsive/core/js/responsive-modernizr.js?ver=2.6.1'></script>
 		<script type='text/javascript' src='http://www.greenenergy-money.com/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.3'></script>
@@ -749,8 +696,6 @@ If you aren’t sure what your utility costs are, you may want to have access to
 		<script type='text/javascript' src='main.js?ver=1.0.0'></script>
 
 
-
-  
 <!-- This site is optimized with the Yoast WordPress SEO plugin v2.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
 <!-- Admin only notice: this page doesn't show a meta description because it doesn't have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template. -->
 <link rel="canonical" href="http://www.greenenergy-money.com/?page_id=1100" />
@@ -918,6 +863,13 @@ If you aren’t sure what your utility costs are, you may want to have access to
 </header>      
 
 <div class="wrap contentclass" role="document">
+	<div id="pageheader" class="titleclass">
+		<div class="container">
+			<div class="page-header">
+	<h1 class="entry-title" itemprop="name">
+		Free Instant Report </h1>
+   	</div>		</div><!--container-->
+	</div><!--titleclass-->
 	<div id="content" class="container">
 		<div class="row">
 			<div class="main col-md-12" role="main">
