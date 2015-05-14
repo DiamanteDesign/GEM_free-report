@@ -122,7 +122,7 @@ if(isset($_POST['action'])){
 
 			$step = 'Property Details';
 
-		} else if ($_POST['action'] == 'Get Your Free Report'){
+		} else if ($_POST['action'] == 'Get Your Free Instant Report'){
 
 			$sql = "UPDATE gem_basic_reports SET level_of_efficiency = :level_of_efficiency, updated_at = NOW() WHERE id = {$_SESSION['basic_report']['id']}"; //,level_of_comfort = :level_of_comfort,level_of_comfort = :level_of_comfort,ease_of_process = :ease_of_process,budget = :budget,insulation = :insulation,hvac_system = :hvac_system,radiant_barrier = :radiant_barrier,lighting = :lighting,appliances = :appliances,solar_film_on_windows = :solar_film_on_windows,building_envelope_retrofit = :building_envelope_retrofit,windows = :windows,solar_hot_water = :solar_hot_water,roof_radiant = :roof_radiant,solar = :solar,rainwater_harvesting_system = :rainwater_harvesting_system,water_recycling = :water_recycling,
 			$q = $DBH->prepare($sql); 
@@ -152,10 +152,9 @@ if(isset($_POST['action'])){
 	<li class='col-1-3 last'><h5>Step 3</h5></li>
 </ul>
 		
-		
 			<form accept-charset='UTF-8' action='{$_SERVER['PHP_SELF']}' class='free-report' method='post' name='free-report'><input type='hidden' name='tokenized' value='$token'/>
 			<fieldset>
-				<legend>To get your Free Report, simply get started now on the questionnaire below!</legend>
+				<legend>To get your Free Instant Report, simply get started now on the questionnaire below!</legend>
 				<div class='field col-1-2'>
 					<label for='client_first_name'>First name</label><input type='text' id='client_first_name' name='client[first_name]' required placeholder=''>
 				</div>
@@ -185,7 +184,9 @@ if(isset($_POST['action'])){
 				</div>
 
 			</fieldset>
-			</form>";
+			</form>
+<p>This information supports important decisions about whether--and a range of how much--to invest in energy upgrades for your existing property.  <p>Once you have determined estimated costs, and potential return on investment it’s easy to proceed to obtain loan approval and be connected to our preferred builders/contractors to receive bids, energy audits and facilitate the necessary process. <p>If you aren’t sure what your utility costs are, you may want to have access to the last year's utility bills handy, as one of the questions relates to yearly utility costs.  Please include all utility costs including electric, gas, propane, oil, etc.  
+</p>";
 
 /*********************************
  *  BEGIN FORM STEP 1 - SIDEBAR  *
@@ -195,12 +196,7 @@ if(isset($_POST['action'])){
 
 •	An estimated range of energy upgrade costs, based on level of energy reduction you choose from our menu.  Costs vary depending on condition, regional building and energy costs, and other factors.<p>
 •	An estimate of your home's estimated “green premium” value once your upgrades are completed.<p> 
-•	Potential estimated early payoff on loan – assuming energy savings applied to loan balance.<p>
-
-This information supports important decisions about whether--and a range of how much--to invest in energy upgrades for your existing property.  <p>Once you have determined estimated costs, and potential return on investment it’s easy to proceed to obtain loan approval and be connected to our preferred builders/contractors to receive bids, energy audits and facilitate the necessary process.   <p> 
-
-If you aren’t sure what your utility costs are, you may want to have access to the last year's utility bills handy, as one of the questions relates to yearly utility costs.  Please include all utility costs including electric, gas, propane, oil, etc.  
-</p>";
+•	Potential estimated early payoff on loan – assuming energy savings applied to loan balance.<p>";
 /*******************************
  *  END FORM STEP 1 - SIDEBAR  *
  *******************************/
@@ -359,7 +355,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 						</div>
 					</fieldset>
 					<div class='actions'>
-						<input name='action' type='submit' value='Get Your Free Report'>
+						<input id='final-submit' name='action' type='submit' value='Get Your Free Instant Report'>
 					</div>
 				</form>";
 			
@@ -402,14 +398,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 				$property_median_budget_lo= $cost[$eff][0] * (int)$basic_report['sqft'];
 				$property_median_budget_hi= $cost[$eff][1] * (int)$basic_report['sqft'];
 				$property_median_budget = array($property_median_budget_lo, $property_median_budget_hi);
-/*
-				echo $eff;
-				echo $property_median_budget_lo;
-				echo $property_median_budget_hi;
-				echo $property_median_budget[0];
-				echo $cost[$eff][1];
-				echo (int)$basic_report['sqft'];
-*/
+
 				
 				switch($basic_report_pt2['level_of_efficiency']){
 					case "E-4":
@@ -762,7 +751,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 <![endif]-->
 <style type="text/css" title="dynamic-css" class="options-output">header #logo a.brand,.logofont{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:32px;}.kad_tagline{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;color:#444444;font-size:14px;}.product_item .product_details h5{font-family:Lato;line-height:20px;font-weight:700;font-style:normal;font-size:16px;}h1{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:38px;}h2{font-family:Lato;line-height:40px;font-weight:normal;font-style:normal;font-size:32px;}h3{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:28px;}h4{font-family:Lato;line-height:40px;font-weight:400;font-style:normal;font-size:24px;}h5{font-family:Lato;line-height:24px;font-weight:700;font-style:normal;font-size:18px;}body{font-family:Verdana, Geneva, sans-serif;line-height:20px;font-weight:400;font-style:normal;font-size:14px;}#nav-main ul.sf-menu a{font-family:Lato;line-height:18px;font-weight:700;font-style:normal;color:#193874;font-size:16px;}#nav-second ul.sf-menu a{font-family:Lato;line-height:22px;font-weight:400;font-style:normal;font-size:18px;}.kad-nav-inner .kad-mnav, .kad-mobile-nav .kad-nav-inner li a,.nav-trigger-case{font-family:Lato;line-height:20px;font-weight:400;font-style:normal;font-size:16px;}</style>
 
-<link rel='stylesheet' href='report.css' type='text/css' media='all' />  
+<link rel='stylesheet' href='css/report.css' type='text/css' media='all' />  
 <link rel='stylesheet' href='css/tooltip-box.css' type='text/css' media='all' /> 
 </head>
 <?php 
@@ -916,7 +905,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 				</aside>
 			</div>
 		</div><!-- /.row-->
-	</div><!-- /.container -->
+
 	<div class="footercredits clearfix">
 		<div class="footernav clearfix">
 			<ul id="menu-footer-nav" class="footermenu">
@@ -927,6 +916,7 @@ If you aren’t sure what your utility costs are, you may want to have access to
 			</ul>
 		</div><!-- /.footernav -->
 		<p>Copyright © 2015 | Green Energy Money </p>
+	</div><!-- /.container -->
 	</div><!-- /.footercredits -->
 </footer>
 		    </div><!--/.wrapper-->
